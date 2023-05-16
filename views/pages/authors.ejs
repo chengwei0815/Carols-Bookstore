@@ -1,0 +1,41 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/navbar') -%> 
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="row">
+
+        <div class="content">
+            <h3>Authors</h3>
+            <p>Listing of all the authors you can find in the store.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- main-content section starts  -->
+
+<section class="main-content" id="main-content">
+
+    <h1 class="heading"> <span>list of authors</span> </h1>
+
+      <div class="main-content-layout">
+        <!-- Using a for...of loop, loop through the authoryArray and display each author -->
+        <% for (author of authorArray)  { %>
+          <a href="/authors/<%= author._id %>" class="box">
+              <div class="content">
+                  <h3><%= author.firstName %> <%= author.lastName %></h3>
+              </div>
+          </a>
+          <% } %> 
+        </div>
+
+</section>
+
+<!-- main-content section ends -->
+
+<%- include('../partials/footer') -%> 

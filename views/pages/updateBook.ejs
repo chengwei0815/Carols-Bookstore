@@ -1,0 +1,40 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/adminNavbar') -%> 
+
+<main>
+  <h1 class="heading"> <span>update book</span> </h1>
+  <form action="/books/<%= foundBook._id %>?_method=PUT" method="POST">
+    <div>
+      <label for="title">Title: </label>
+      <input type="text" name="title" id="title" minlength="1" value="<%= foundBook.title %>" required />
+  </div>
+
+  <div>
+      <label for="author">Author: </label>
+      <input type="text" name="author" id="author" minlength="5" value="<%= foundBook.author %>"required />
+  </div>
+
+  <div>
+      <label for="price">Price: </label>
+      <input type="number" name="price" id="price" min="1" value="<%= foundBook.price %>" required />
+  </div>
+
+  <div>
+      <label for="starRating">Star Ratings: </label>
+      <input type="number" name="starRating" id="starRating" min="1" max="5" value="<%= foundBook.starRating %>" required />
+  </div>
+
+  <div>
+      <label for="synopsis">Synopsis:</label>
+      <textarea class="text-area-label" name="synopsis" id="synopsis" ><%= foundBook.synopsis %></textarea>
+  </div>
+
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+
+</form>
+</main>
+
+<%- include('../partials/footer') -%> 

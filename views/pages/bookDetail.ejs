@@ -1,0 +1,35 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/navbar') -%> 
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+  <div class="row">
+
+      <div class="content">
+          <h3><%= inventoryItem.title %></h3>
+          <p>Book Detail</p>
+      </div>
+
+  </div>
+
+</section>
+
+
+<main>
+<p><strong>Title: </strong><%= inventoryItem.title %></p>
+<p><strong>Author:</strong> <%= inventoryItem.author %></p>
+<p><strong>Price:</strong> $<%= inventoryItem.price %></p>
+<p><strong>Rating: </strong>
+  <% for(let i = 0; i < inventoryItem.starRating; i++) {%>
+    <i class="fas fa-star"></i>
+  <% }%></p>
+  <p><strong>Synopsis:</strong> <%= inventoryItem.synopsis %></p>
+
+  <a href="/books" class="btn">back to books</a>
+</main>
+
+
+<%- include('../partials/footer') -%> 

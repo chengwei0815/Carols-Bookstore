@@ -1,0 +1,48 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/navbar') -%> 
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="row">
+
+        <div class="content">
+            <h3>Books</h3>
+            <p>Listing of all the latest books in the store.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- main-content section starts  -->
+
+<section class="main-content" id="main-content">
+
+    <h1 class="heading"> <span>latest books</span> </h1>
+
+      <div class="main-content-layout">
+        <!-- Using a for...of loop, loop through the inventoryArray and display each book -->
+        <% for (book of inventoryArray)  { %>
+          <a href="/books/<%= book._id %>" class="box">
+              <div class="content">
+                  <h3><%= book.title %></h3>
+                  <p class="author"><%= book.author %></p>
+                  <p class="price">$<%= book.price %></p>
+                  <div class="stars">
+                    <% for(let i = 0; i < book.starRating; i++) {%>
+                      <i class="fas fa-star"></i>
+                    <% }%>
+                  </div>
+              </div>
+          </a>
+          <% } %> 
+      </div>  
+
+</section>
+
+<!-- main-content section ends -->
+
+<%- include('../partials/footer') -%> 

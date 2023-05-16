@@ -1,0 +1,35 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/adminNavbar') -%> 
+
+<main>
+  <h1 class="heading"> <span>Create Author</span> </h1>
+    <form action="/authors" method="POST">
+      <div>
+          <label for="firstName">First Name: </label>
+          <input type="text" name="firstName" id="firstName" minlength="1" required />
+      </div>
+
+      <div>
+        <label for="lastName">Last Name: </label>
+        <input type="text" name="lastName" id="lastName" minlength="1" required />
+      </div>
+
+      <div>
+          <label for="birthYear">Birth Year: </label>
+          <input type="number" name="birthYear" id="birthYear" min="4" max="4" required />
+      </div>
+
+      <div>
+          <label for="bio">Biography: </label>
+          <textarea name="bio" id="bio" minlength="10" required></textarea>
+      </div>
+
+      <div>
+          <input type="submit" value="Submit" />
+      </div>
+
+  </form>
+</main>
+
+<%- include('../partials/footer') -%> 

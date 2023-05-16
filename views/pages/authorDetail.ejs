@@ -1,0 +1,30 @@
+<%- include('../partials/head') -%> 
+    
+<%- include('../partials/navbar') -%> 
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="row">
+
+        <div class="content">
+            <h3><%= author.firstName %> <%= author.lastName %></h3>
+            <p>Author's biography</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+  <p><strong>First Name:</strong> <%= author.firstName %></p>
+  <p><strong>Last Name:</strong> <%= author.lastName %></p>
+  <p><strong>Birth Year:</strong> <%= author.birthYear%></p>
+  <p><strong>Biography:</strong> <%= author.bio %></p>
+
+  <a href="/authors" class="btn">back to authors</a>
+</main>
+
+<%- include('../partials/footer') -%> 
