@@ -14,4 +14,8 @@ router.route('/login')
   .get(siteCtrl.login_get)
   .post(siteCtrl.login_post)
 
+// add a logout route to destroy the session
+router.route('logout')
+  .get(siteCtrl.logout)
+
 module.exports = router;

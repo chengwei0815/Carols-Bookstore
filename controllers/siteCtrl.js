@@ -1,7 +1,8 @@
 const User = require('../models/userModel');
 const siteData = require('../data/siteData');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const passport = require('passport');
+// const bcrypt = require('bcrypt');
+// const saltRounds = 10;
 
 module.exports = {
   index: (request, response) => {
@@ -16,41 +17,73 @@ module.exports = {
       copyrightYear: siteData.year
     });
   },
+
+  //we are making changes here
   register_post:(request, response) => {
-    const {username, password} = request.body;
-    bcrypt.hash(password, saltRounds, (error, hash) => {
-      const newUser = new User({
-        username: username,
-        password: hash
-      });
-      newUser.save();
-      console.log(`The hash value being saved where the password string was saved previously is: ${hash}.`);
-      response.redirect('/admin');
-    }); 
+    User.register({ username: request.body.username }, request.body.password, (error, user) => {
+      if (error) {
+        console.log(error);
+        response.redirect('/register');
+      } else {
+        passport.authenticate('local')(request, response, () => {
+          response.redirect('/login');
+        });
+      }
+    });
   },
   login_get: (request, response) => {
     response.render('pages/login',{
       copyrightYear: siteData.year
     });
   },
+  // login_post: (request, response) => {
+  //   const {username, password} = request.body;
+  //   console.log(`password entered is: ${password}`);
+  //   User.findOne({username: username}, (error, foundUser) => {
+  //     if (error) {
+  //       console.log(`The error at login is: ${error}`);
+  //     } else {
+  //       if(foundUser) {
+  //         console.log(`username was matched: ${foundUser.username}`);
+  //         console.log(`their password is: ${foundUser.password}`);
+  //         bcrypt.compare(password, foundUser.password, (error, result) => {
+  //           if (result === true) {
+  //             console.log(`user ${foundUser.username} successfully logged in`);
+  //             response.redirect('/admin');
+  //           };
+  //         });
+  //       };
+  //     };
+  //  });
+  // }
   login_post: (request, response) => {
-    const {username, password} = request.body;
-    console.log(`password entered is: ${password}`);
-    User.findOne({username: username}, (error, foundUser) => {
+    const { username, password } = request.body;
+    // console.log(`password entered is: ${password}`);
+
+    const user = new User({
+      username: username,
+      password: password
+    });
+
+    request.login(user, (error) => {
       if (error) {
-        console.log(`The error at login is: ${error}`);
+        console.log(error)
+        response.redirect('/login');
       } else {
-        if(foundUser) {
-          console.log(`username was matched: ${foundUser.username}`);
-          console.log(`their password is: ${foundUser.password}`);
-          bcrypt.compare(password, foundUser.password, (error, result) => {
-            if (result === true) {
-              console.log(`user ${foundUser.username} successfully logged in`);
-              response.redirect('/admin');
-            };
-          });
-        };
-      };
-   });
-  }
+        passport.authenticate('local')(request, response, () => {
+          response.redirect('/admin');
+        });
+      }
+    });
+  },
+  // we are changing here
+
+  logout: (request, response) => {
+    request.logout(function (err) {
+      if (err) { return next(err); }
+
+      response.redirect('/');
+    })}
+
+
 }

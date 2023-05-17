@@ -1,7 +1,7 @@
 {
-  "name": "carols-bookstore-2022",
+  "name": "carols-bookstore-2023",
   "version": "1.0.0",
-  "description": "Carol's Bookstore - CodeSquad - 2022 ",
+  "description": "Carol's Bookstore - CodeSquad - 2023 ",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -15,8 +15,14 @@
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
+    "express-session": "^1.17.3",
     "method-override": "^3.0.0",
     "mongoose": "^6.3.0",
+    "node": "^16.14.2",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
