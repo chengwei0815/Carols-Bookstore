@@ -3,7 +3,7 @@ const Book = require('../models/bookModel');
 
 module.exports = {
   all_books: (request, response) => {
-    if (request.isAuthenticated()) {
+    // if (request.isAuthenticated()) {
       Book.find({}, (error, allBooks) => {
         if (error) {
           return error;
@@ -14,10 +14,12 @@ module.exports = {
           });
         }
       })
-    }
+    // } else {
+    //   console.log('There is an error.')
+    // }
   },
   book_detail: (request, response) => {
-    if (request.isAuthenticated()) {
+    // if (request.isAuthenticated()) {
       const { _id } = request.params;
       Book.findOne({ _id: _id }, (error, foundBook) => {
         if (error) {
@@ -29,11 +31,11 @@ module.exports = {
           });
         }
       })
-    }
+    // }
   },
   // we are changing here
   book_create_post: (request, response) => {
-    if (request.isAuthenticated()){
+    // if (request.isAuthenticated()){
       const { title, author, price, starRating, synopsis } = request.body;
       const newBook = new Book({
         title: title,
@@ -46,11 +48,11 @@ module.exports = {
       newBook.save();
 
       response.redirect("/admin/admin-books");
-    }
+    // }
   },
 
   book_update_put: (request, response) => {
-    if (request.isAuthenticated()) {
+    // if (request.isAuthenticated()) {
       const { _id } = request.params;
 
       const { title, author, price, starRating, synopsis } = request.body;
@@ -70,10 +72,10 @@ module.exports = {
           response.redirect('/admin/admin-books');
         }
       })
-    }
+    // }
   },
   book_delete: (request, response) => {
-    if (request.isAuthenticated()) {
+    // if (request.isAuthenticated()) {
       const { _id } = request.params;
       Book.deleteOne({ _id: _id }, error => {
         if (error) {
@@ -82,6 +84,6 @@ module.exports = {
           response.redirect('/admin/admin-books')
         }
       });
-    }
+    // }
   }
 }

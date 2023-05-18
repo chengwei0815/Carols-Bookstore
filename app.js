@@ -10,7 +10,7 @@ const routes = require('./routes/index');
 const app = express();
 // const PORT = 3000;
 //convert the port to store it within the ENV
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
@@ -44,7 +44,7 @@ app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
     console.log('You can put your MongoDB link here when the server restart to jump to your database');
 
-    console.log('https://cloud.mongodb.com/v2/6451a0803f06257f573ab091#/host/replicaSet/645ad0c0b1e52716139951e6');
+    console.log('https://cloud.mongodb.com/v2/6451a0803f06257f573ab091#/metrics/replicaSet/645ad0c0b1e52716139951e6/explorer/carolsBookstore/authors/find');
 
 
 

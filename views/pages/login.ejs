@@ -1,6 +1,6 @@
-<%- include('../partials/head') -%> 
+<%- include('../partials/head') -%>
 
-<%- include('../partials/navbar') -%> 
+<%- include('../partials/navbar') -%>
 
 <!-- main-content section starts  -->
 
@@ -18,10 +18,16 @@
     <div>
         <input type="submit" value="Submit"/>
     </div>
-    <p>Don't Have An Account? <a href="/register">Create one here.</a></p>
+
+    <button>
+      <a href="/auth/google" role="button">Login with Google</a>
+    </button>
+
+    <p>Don't Have An Account?<a href="/register">Create one here.</a> </p>
+    
   </form>
 </main>
 
 <!-- main-content section ends -->
 
-<%- include('../partials/footer') -%> 
+<%- include('../partials/footer') -%>
