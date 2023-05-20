@@ -45,17 +45,19 @@ passport.deserializeUser(function (user, cb) {
   });
 });
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/google/admin'
-
-},
-function(accessToken, refreshToken, email, cb) {
-  User.findOrCreate({ googleId: email.id }, function (err, user) {
-    return cb(err, user);
-  });
-}
-));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "https://curious-wasp-pantsuit.cyclic.app/auth/google/admin",
+    },
+    function (accessToken, refreshToken, email, cb) {
+      User.findOrCreate({ googleId: email.id }, function (err, user) {
+        return cb(err, user);
+      });
+    }
+  )
+);
 
 module.exports = User;
