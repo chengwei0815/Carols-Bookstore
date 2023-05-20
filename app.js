@@ -24,8 +24,8 @@ app.use(morgan('dev'));
 
 app.use(session({
     secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true,
 }));
 
 // initialize passport

@@ -15,7 +15,8 @@ module.exports = {
         }
       })
     // } else {
-    //   console.log('There is an error.')
+    //   console.log('There is an error.');
+    //   response.redirect('/');
     // }
   },
   book_detail: (request, response) => {

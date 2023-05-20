@@ -1,71 +1,96 @@
-const siteData = require('../data/siteData');
-const Book = require('../models/bookModel');
-const Author = require('../models/authorModel');
+const siteData = require("../data/siteData");
+const Book = require("../models/bookModel");
+const Author = require("../models/authorModel");
 
 module.exports = {
   admin: (request, response) => {
-    response.render('pages/admin', {
-      copyrightYear: siteData.year
-    });
+    if (request.isAuthenticated()) {
+      response.render("pages/admin", {
+        copyrightYear: siteData.year,
+      });
+    } else {
+      console.log("There is an error.");
+      response.redirect("/login");
+    }
   },
   admin_books: (request, response) => {
     Book.find({}, (error, allBooks) => {
-      if(error){
+      if (error) {
         return error;
       } else {
-        response.render('pages/adminBooks', {
-          copyrightYear: siteData.year,
-          inventoryArray: allBooks
-        });
+        if (request.isAuthenticated()) {
+          response.render("pages/adminBooks", {
+            copyrightYear: siteData.year,
+            inventoryArray: allBooks,
+          });
+        } else {
+          console.log("There is an error.");
+          response.redirect("/login");
+        }
       }
-    })
+    });
   },
   create_book: (request, response) => {
-    response.render('pages/bookCreate', {
+    response.render("pages/bookCreate", {
       copyrightYear: siteData.year,
     });
   },
   admin_authors: (request, response) => {
     Author.find({}, (error, allAuthors) => {
-      if(error){
+      if (error) {
         return error;
       } else {
-        response.render('pages/adminAuthors', {
-          copyrightYear: siteData.year,
-          authorArray: allAuthors
-        });
+        if (request.isAuthenticated()) {
+          response.render("pages/adminAuthors", {
+            copyrightYear: siteData.year,
+            authorArray: allAuthors,
+          });
+        } else {
+          console.log("There is an error.");
+          response.redirect("/login");
+        }
       }
-    })
+    });
   },
   create_author: (request, response) => {
-    response.render('pages/authorCreate', {
+    response.render("pages/authorCreate", {
       copyrightYear: siteData.year,
     });
   },
   book_update_get: (request, response) => {
     const { _id } = request.params;
-    Book.findOne({_id: _id}, (error, foundBook) => {
-      if(error) {
+    Book.findOne({ _id: _id }, (error, foundBook) => {
+      if (error) {
         return error;
       } else {
-        response.render('pages/updateBook', {
-          copyrightYear: siteData.year,
-          foundBook: foundBook
-        });
+        if (request.isAuthenticated()) {
+          response.render("pages/updateBook", {
+            copyrightYear: siteData.year,
+            foundBook: foundBook,
+          });
+        } else {
+          console.log("There is an error.");
+          response.redirect("/login");
+        }
       }
-    });    
+    });
   },
   author_update_get: (request, response) => {
     const { _id } = request.params;
-    Author.findOne({_id: _id}, (error, foundAuthor) => {
-      if(error) {
+    Author.findOne({ _id: _id }, (error, foundAuthor) => {
+      if (error) {
         return error;
       } else {
-        response.render('pages/updateAuthor', {
-          copyrightYear: siteData.year,
-          foundAuthor: foundAuthor
-        });
+        if (request.isAuthenticated()) {
+          response.render("pages/updateAuthor", {
+            copyrightYear: siteData.year,
+            foundAuthor: foundAuthor,
+          });
+        } else {
+          console.log("There is an error.");
+          response.redirect("/login");
+        }
       }
-    });   
-  }
-}
+    });
+  },
+};
