@@ -1,32 +1,34 @@
-require('dotenv').config();
-const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
-const methodOverride = require('method-override');
+require("dotenv").config();
+const express = require("express");
+const morgan = require("morgan");
+const path = require("path");
+const methodOverride = require("method-override");
 //Configure the app - install and require session and passport packages here
-const session = require('express-session');
-const passport = require('passport');
-const routes = require('./routes/index');
+const session = require("express-session");
+const passport = require("passport");
+const routes = require("./routes/index");
 const app = express();
 // const PORT = 3000;
 //convert the port to store it within the ENV
 const PORT = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(methodOverride('_method'));
-app.use(morgan('dev'));
+app.use(methodOverride("_method"));
+app.use(morgan("dev"));
 
 //create the container for express to use sessions to store the user state
 
-app.use(session({
+app.use(
+  session({
     secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-}));
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 // initialize passport
 app.use(passport.initialize());
@@ -34,20 +36,40 @@ app.use(passport.initialize());
 // passport to use session
 app.use(passport.session());
 
-
 app.use(routes);
 
-require('./config/connection');
+require("./config/connection");
+
+// client.connect((err) => {
+//   if (err) {
+//     console.error(err);
+//     return false;
+//   }
+// connection to mongo is successful, listen for requests
+//   app.listen(PORT, () => {
+//         console.log(`The server is listening on port ${PORT}`);
+//         console.log(`http://localhost:${PORT}`);
+//         console.log(
+//           "You can put your MongoDB link here when the server restart to jump to your database"
+//         );
+
+//         console.log(
+//           "https://cloud.mongodb.com/v2/6451a0803f06257f573ab091#/metrics/replicaSet/645ad0c0b1e52716139951e6/explorer/carolsBookstore/authors/find"
+//         );
+
+//   });
+// });
 
 app.listen(PORT, () => {
-    console.log(`The server is listening on port ${PORT}`);
-    console.log(`http://localhost:${PORT}`);
-    console.log('You can put your MongoDB link here when the server restart to jump to your database');
+  console.log(`The server is listening on port ${PORT}`);
+  console.log(`http://localhost:${PORT}`);
+  console.log(
+    "You can put your MongoDB link here when the server restart to jump to your database"
+  );
 
-    console.log('https://cloud.mongodb.com/v2/6451a0803f06257f573ab091#/metrics/replicaSet/645ad0c0b1e52716139951e6/explorer/carolsBookstore/authors/find');
-
-
-
+  console.log(
+    "https://cloud.mongodb.com/v2/6451a0803f06257f573ab091#/metrics/replicaSet/645ad0c0b1e52716139951e6/explorer/carolsBookstore/authors/find"
+  );
 });
 
 /*

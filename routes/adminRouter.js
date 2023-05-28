@@ -2,15 +2,6 @@ const express = require("express");
 const router = express.Router();
 const adminCtrl = require("../controllers/adminCtrl");
 
-// CREATE new routes
-router.route("/adminInfo").get(adminCtrl.how_to_admin);
-
-router
-  .route("/logout")
-  // PURPOSE: Logs the user out if signed in
-  .get(adminCtrl.logout);
-
-// DO NOT TOUCH
 // ADMIN ROUTES
 router.route("/").get(adminCtrl.admin);
 

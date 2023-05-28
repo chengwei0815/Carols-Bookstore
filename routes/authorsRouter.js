@@ -1,16 +1,18 @@
-const express = require('express');
-const authorsCtrl = require('../controllers/authorsCtrl');
+const express = require("express");
+const authorsCtrl = require("../controllers/authorsCtrl");
 const router = express.Router();
 
 // AUTHORS ROUTES
 
-router.route('/')
+router
+  .route("/")
   .get(authorsCtrl.all_authors)
-  .post(authorsCtrl.author_create_post)
+  .post(authorsCtrl.author_create_post);
 
-router.route('/:_id')
+router
+  .route("/:_id")
   .get(authorsCtrl.author_detail)
   .put(authorsCtrl.author_update_put)
-  .delete(authorsCtrl.author_delete)
+  .delete(authorsCtrl.author_delete);
 
-  module.exports = router;
+module.exports = router;

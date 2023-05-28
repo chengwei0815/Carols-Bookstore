@@ -1,6 +1,6 @@
-const User = require('../models/userModel');
-const siteData = require('../data/siteData');
-const passport = require('passport');
+const User = require("../models/userModel");
+const siteData = require("../data/siteData");
+const passport = require("passport");
 // const bcrypt = require('bcrypt');
 // const saltRounds = 10;
 
@@ -19,36 +19,22 @@ module.exports = {
   },
 
   //we are making changes here
-
   register_post: (request, response) => {
-    // added in Code Along - differs from slides
-    const { username, password } = request.body;
-    User.register({ username: username }, password, (error) => {
-      if (error) {
-        console.log(error);
-        response.redirect("/register");
-        // check the routes folder to check --> siteRouter --> redirect trigger --> GET
-      } else {
-        // if they are successful
-        passport.authenticate("local")(request, response, () => {
-          response.redirect("/login");
-          // you created your account --> login --> GET
-        });
+    User.register(
+      { username: request.body.username },
+      request.body.password,
+      (error, user) => {
+        if (error) {
+          console.log(error);
+          response.redirect("/register");
+        } else {
+          passport.authenticate("local")(request, response, () => {
+            response.redirect("/login");
+          });
+        }
       }
-    }); // added in Code Along
+    );
   },
-  // register_post:(request, response) => {
-  //   User.register({ username: request.body.username }, request.body.password, (error, user) => {
-  //     if (error) {
-  //       console.log(error);
-  //       response.redirect('/register');
-  //     } else {
-  //       passport.authenticate('local')(request, response, () => {
-  //         response.redirect('/login');
-  //       });
-  //     }
-  //   });
-  // },
   login_get: (request, response) => {
     response.render("pages/login", {
       copyrightYear: siteData.year,
