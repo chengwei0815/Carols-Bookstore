@@ -6,7 +6,7 @@ module.exports = {
   admin: (request, response) => {
     if (request.isAuthenticated()) {
       response.render("pages/admin", {
-        // copyrightYear: siteData.year,
+        copyrightYear: siteData.year,
       });
     } else {
       console.log("There is an error.");
@@ -17,7 +17,7 @@ module.exports = {
   how_to_admin: (request, response) => {
     if (request.isAuthenticated()) {
       response.render("pages/adminInfo", {
-        // copyrightYear: siteData.year,
+        copyrightYear: siteData.year,
       });
     } else {
       response.redirect("/login");
@@ -43,7 +43,7 @@ module.exports = {
           return error;
         } else {
           response.render("pages/adminBooks", {
-            // copyrightYear: siteData.year,
+            copyrightYear: siteData.year,
             inventoryArray: allBooks,
           });
         }
@@ -73,7 +73,7 @@ module.exports = {
   create_book: (request, response) => {
     if (request.isAuthenticated()) {
       response.render("pages/bookCreate", {
-        // copyrightYear: siteData.year,
+        copyrightYear: siteData.year,
       });
     } else {
       response.redirect("/login");
@@ -92,7 +92,7 @@ module.exports = {
           return error;
         } else {
           response.render("pages/adminAuthors", {
-            // copyrightYear: siteData.year,
+            copyrightYear: siteData.year,
             authorArray: allAuthors,
           });
         }
@@ -122,7 +122,7 @@ module.exports = {
   create_author: (request, response) => {
     if (request.isAuthenticated()) {
       response.render("pages/authorCreate", {
-        // copyrightYear: siteData.year,
+        copyrightYear: siteData.year,
       });
     } else {
       response.redirect("/login");
@@ -142,7 +142,7 @@ module.exports = {
           return error;
         } else {
           response.render("pages/updateBook", {
-            // copyrightYear: siteData.year,
+            copyrightYear: siteData.year,
             foundBook: foundBook,
           });
         }
@@ -177,7 +177,7 @@ module.exports = {
           return error;
         } else {
           response.render("pages/updateAuthor", {
-            // copyrightYear: siteData.year,
+            copyrightYear: siteData.year,
             foundAuthor: foundAuthor,
           });
         }
