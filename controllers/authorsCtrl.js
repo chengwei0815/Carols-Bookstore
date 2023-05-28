@@ -39,7 +39,7 @@ module.exports = {
 
     newAuthor.save();
 
-    response.redirect("/admin/admin-authors"); 
+    response.redirect("/admin/admin-authors");
   },
   author_update_put: (request, response) => {
     const { _id } = request.params;
@@ -55,7 +55,7 @@ module.exports = {
       } else {
         response.redirect("/admin/admin-authors");
       }
-    })    
+    })
   },
   author_delete: (request, response) => {
     const { _id } = request.params;
@@ -65,6 +65,6 @@ module.exports = {
       } else {
         response.redirect("/admin/admin-authors")
       }
-    }); 
+    });
   }
 }
