@@ -15,8 +15,8 @@ const authorSchema = new Schema({
   birthYear: {
     type: Number,
     required: [true, 'The birth year is required.'],
-    min:[4, 'You need the full year of birth'],
-    max:[4, 'You need the full year of birth']
+    // min:[4, 'You need the full year of birth'],
+    // max:[4, 'You need the full year of birth']
   },
   bio:{
     type: String,

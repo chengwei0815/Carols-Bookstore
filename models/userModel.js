@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 // Configure the app - initial and require passport packages here
-const passport = require('passport');
-const passportLocalMongoose = require('passport-local-mongoose');
-const {Schema} = mongoose;
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const { Schema } = mongoose;
 
 // const mongooseFindOrCreate = require('mongoose-findorcreate');
-const mongooseFindOrCreate = require('mongoose-findorcreate');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongooseFindOrCreate = require("mongoose-findorcreate");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const userSchema = new Schema({
   username: {
@@ -23,7 +23,7 @@ const userSchema = new Schema({
 // summon passportLocalMongoose: adds functionality to simplify how passports builds username and passwords
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(mongooseFindOrCreate);
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 // passport.serializeUser(User.serializeUser());
@@ -40,7 +40,7 @@ passport.serializeUser(function (user, cb) {
 });
 
 passport.deserializeUser(function (user, cb) {
-  process.nextTick(function() {
+  process.nextTick(function () {
     return cb(null, user);
   });
 });
@@ -50,7 +50,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "https://curious-wasp-pantsuit.cyclic.app/auth/google/admin",
+      callbackURL: "https://localhost:3000/auth/google/admin",
     },
     function (accessToken, refreshToken, email, cb) {
       User.findOrCreate({ googleId: email.id }, function (err, user) {

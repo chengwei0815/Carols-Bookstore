@@ -6,34 +6,52 @@ const passport = require('passport');
 
 module.exports = {
   index: (request, response) => {
-    response.render('pages/index', {
-        name: siteData.userName,
-        copyrightYear: siteData.year,
-        signedIn: siteData.signedIn
+    response.render("pages/index", {
+      name: siteData.userName,
+      copyrightYear: siteData.year,
+      signedIn: siteData.signedIn,
     });
   },
-  register_get:(request, response) => {
-    response.render('pages/register', {
-      copyrightYear: siteData.year
+  register_get: (request, response) => {
+    response.render("pages/register", {
+      copyrightYear: siteData.year,
     });
   },
 
   //we are making changes here
-  register_post:(request, response) => {
-    User.register({ username: request.body.username }, request.body.password, (error, user) => {
+
+  register_post: (request, response) => {
+    // added in Code Along - differs from slides
+    const { username, password } = request.body;
+    User.register({ username: username }, password, (error) => {
       if (error) {
         console.log(error);
-        response.redirect('/register');
+        response.redirect("/register");
+        // check the routes folder to check --> siteRouter --> redirect trigger --> GET
       } else {
-        passport.authenticate('local')(request, response, () => {
-          response.redirect('/login');
+        // if they are successful
+        passport.authenticate("local")(request, response, () => {
+          response.redirect("/login");
+          // you created your account --> login --> GET
         });
       }
-    });
+    }); // added in Code Along
   },
+  // register_post:(request, response) => {
+  //   User.register({ username: request.body.username }, request.body.password, (error, user) => {
+  //     if (error) {
+  //       console.log(error);
+  //       response.redirect('/register');
+  //     } else {
+  //       passport.authenticate('local')(request, response, () => {
+  //         response.redirect('/login');
+  //       });
+  //     }
+  //   });
+  // },
   login_get: (request, response) => {
-    response.render('pages/login',{
-      copyrightYear: siteData.year
+    response.render("pages/login", {
+      copyrightYear: siteData.year,
     });
   },
   // login_post: (request, response) => {
@@ -62,16 +80,16 @@ module.exports = {
 
     const user = new User({
       username: username,
-      password: password
+      password: password,
     });
 
     request.login(user, (error) => {
       if (error) {
-        console.log(error)
-        response.redirect('/login');
+        console.log(error);
+        response.redirect("/login");
       } else {
-        passport.authenticate('local')(request, response, () => {
-          response.redirect('/admin');
+        passport.authenticate("local")(request, response, () => {
+          response.redirect("/admin");
         });
       }
     });
@@ -80,18 +98,22 @@ module.exports = {
 
   logout: (request, response) => {
     request.logout(function (err) {
-      if (err) { return next(err); }
+      if (err) {
+        return next(err);
+      }
 
-      response.redirect('/');
-    })},
+      response.redirect("/");
+    });
+  },
 
-// OAuth
-  google_get: passport.authenticate('google', { scope: ['openid', 'profile', 'email'] }),
+  // OAuth
+  google_get: passport.authenticate("google", {
+    scope: ["openid", "profile", "email"],
+  }),
   google_redirect_get: [
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate("google", { failureRedirect: "/login" }),
     function (request, response) {
-      response.redirect('/admin');
-    }
-  ]
-
-}
+      response.redirect("/admin");
+    },
+  ],
+};

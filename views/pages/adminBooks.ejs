@@ -1,6 +1,6 @@
-<%- include('../partials/head') -%> 
-    
-<%- include('../partials/adminNavbar') -%> 
+<%- include('../partials/head') -%>
+
+<%- include('../partials/adminNavbar') -%>
 
 <!-- main-content section starts  -->
 
@@ -9,24 +9,27 @@
   <h1 class="heading"> <span>admin - books</span> </h1>
 
       <div class="main-content-layout">
-
+        <span class="box">
+          <h3 class="expansion">Reminder: </h3>
+          <p class="content expansion"> it is always preferred to edit an entry over deleting one. Please ask for confirmation before deleting an entry. Thank you!</p>
+        </span>
         <% for (book of inventoryArray)  { %>
           <div class="box">
               <div class="content">
                   <h3><%= book.title %></h3>
                   <p class="author"><%= book.author %></p>
-                  <a href="./<%= book._id %>/edit-book" class="btn">edit</a> 
+                  <a href="./<%= book._id %>/edit-book" class="btn">edit</a>
                   <form action="/books/<%= book._id %>?_method=DELETE" method="POST" enctype="application/x-www-form-urlencoded" class="inline">
-                    <button class="btn" type="submit">delete</button>
-                  </form>   
+                    <button class="btn delete-button" type="submit" value="Delete?!" id="delete-button" onclick="deleteAlert()">delete?!</button>
+                  </form>
               </div>
           </div>
-          <% } %> 
-
+          <% } %>
         </div>
-
+      <!-- end -->
+      <a href="/admin" class="btn btn-span">go back to admin page</a>
 </section>
 
 <!-- main-content section ends -->
 
-<%- include('../partials/footer') -%> 
+<%- include('../partials/footer') -%>
