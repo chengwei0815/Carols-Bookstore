@@ -1,14 +1,14 @@
 {
-  "name": "carols-bookstore-2023",
+  "name": "Wei-bookstore-2023",
   "version": "1.0.0",
-  "description": "Carol's Bookstore - CodeSquad - 2023 ",
+  "description": "Wei's Bookstore - CodeSquad - 2023 ",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "CodeSquad",
+  "author": "Wei Cheng",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
