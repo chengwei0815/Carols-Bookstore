@@ -82,9 +82,21 @@ module.exports = {
   },
   // we are changing here
 
+  // logout: (request, response) => {
+  //   request.logout();
+  //   response.redirect("/");
+  // },
+
   logout: (request, response) => {
-    request.logout();
-    response.redirect("/");
+    // new code as of 6/2022 - the correct logout function
+    request.logout(function (err) {
+      // destroy the session for the user
+      if (err) {
+        return next(err);
+      }
+      // redirect back to the homepage
+      response.redirect("/");
+    });
   },
 
   // OAuth
