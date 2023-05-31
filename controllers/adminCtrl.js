@@ -13,6 +13,14 @@ module.exports = {
       response.redirect("/login");
     }
   },
+
+  logout: (request, response) => {
+    request.logout(function (err) {
+      if (err) { return next(err); }
+      response.redirect('/');
+    });
+  },
+
   admin_books: (request, response) => {
     Book.find({}, (error, allBooks) => {
       if (error) {
