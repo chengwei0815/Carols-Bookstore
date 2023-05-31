@@ -31,18 +31,19 @@ module.exports = {
       if (error) {
         return error;
       } else {
-        if (request.isAuthenticated()) {
+        // if (request.isAuthenticated()) {
           response.render("pages/adminBooks", {
             copyrightYear: siteData.year,
             inventoryArray: allBooks,
           });
-        } else {
-          console.log("There is an error.");
-          response.redirect("/login");
-        }
+        // } else {
+        //   console.log("There is an error.");
+        //   response.redirect("/login");
+        // }
       }
     });
   },
+
   create_book: (request, response) => {
     response.render("pages/bookCreate", {
       copyrightYear: siteData.year,
@@ -53,15 +54,15 @@ module.exports = {
       if (error) {
         return error;
       } else {
-        if (request.isAuthenticated()) {
+        // if (request.isAuthenticated()) {
           response.render("pages/adminAuthors", {
             copyrightYear: siteData.year,
             authorArray: allAuthors,
           });
-        } else {
-          console.log("There is an error.");
-          response.redirect("/login");
-        }
+        // } else {
+        //   console.log("There is an error.");
+        //   response.redirect("/login");
+        // }
       }
     });
   },
