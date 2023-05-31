@@ -83,13 +83,8 @@ module.exports = {
   // we are changing here
 
   logout: (request, response) => {
-    request.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
-
-      response.redirect("/");
-    });
+    request.logout();
+    response.redirect("/");
   },
 
   // OAuth
