@@ -16,8 +16,10 @@ module.exports = {
 
   logout: (request, response) => {
     request.logout(function (err) {
-      if (err) { return next(err); }
-      response.redirect('/');
+      if (err) {
+        return next(err);
+      }
+      response.redirect("/");
     });
   },
 
