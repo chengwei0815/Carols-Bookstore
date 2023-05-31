@@ -13,7 +13,7 @@ router
 router.route("/login").get(siteCtrl.login_get).post(siteCtrl.login_post);
 
 // add a logout route to destroy the session
-router.route("logout").get(siteCtrl.logout);
+router.route("/logout").get(siteCtrl.logout);
 
 //OAuth
 router.route("/auth/google").get(siteCtrl.google_get);
