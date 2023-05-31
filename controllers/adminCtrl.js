@@ -22,25 +22,22 @@ module.exports = {
   },
 
   admin_books: (request, response) => {
-    if (request.isAuthenticated()) {
-      Book.find({}, (error, allBooks) => {
-        if (error) {
-          return error;
-        } else {
-
+    Book.find({}, (error, allBooks) => {
+      if (error) {
+        return error;
+      } else {
+        if (request.isAuthenticated()) {
           response.render("pages/adminBooks", {
             copyrightYear: siteData.year,
             inventoryArray: allBooks,
           });
-        }
-      });
-    } else {
+        } else {
           console.log("There is an error.");
           response.redirect("/login");
         }
+      }
+    });
   },
-
-
   create_book: (request, response) => {
     response.render("pages/bookCreate", {
       copyrightYear: siteData.year,
