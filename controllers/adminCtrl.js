@@ -77,15 +77,15 @@ module.exports = {
       if (error) {
         return error;
       } else {
-        if (request.isAuthenticated()) {
+        // if (request.isAuthenticated()) {
           response.render("pages/updateBook", {
             copyrightYear: siteData.year,
             foundBook: foundBook,
           });
-        } else {
-          console.log("There is an error.");
-          response.redirect("/login");
-        }
+        // } else {
+        //   console.log("There is an error.");
+        //   response.redirect("/login");
+        // }
       }
     });
   },
@@ -95,15 +95,15 @@ module.exports = {
       if (error) {
         return error;
       } else {
-        if (request.isAuthenticated()) {
+        // if (request.isAuthenticated()) {
           response.render("pages/updateAuthor", {
             copyrightYear: siteData.year,
             foundAuthor: foundAuthor,
           });
-        } else {
-          console.log("There is an error.");
-          response.redirect("/login");
-        }
+        // } else {
+        //   console.log("There is an error.");
+        //   response.redirect("/login");
+        // }
       }
     });
   },
